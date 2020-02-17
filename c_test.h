@@ -19,6 +19,23 @@
 #define MAX_TEST_DESCRIPTION_LENGTH 32u
 
 
+
+/*
+--|--------------------------------------------------------|
+--|
+--| Public C Test Types
+--|
+--|---------------------------------------------------------|
+*/
+
+typedef enum C_Test_Output_Mode_Enum_Type
+{
+    C_TEST_OUTPUT_MODE_SHOW_ALL_RESULTS,
+    C_TEST_OUTPUT_MODE_SHOW_ONLY_FAILING_TESTS
+} c_test_output_mode_enum_t;
+
+
+
 /*
 --|--------------------------------------------------------|
 --|
@@ -45,6 +62,29 @@ Assumptions/Limitations:
     This initialization function is to be called prior to any other c_test function
 -------------------------------------------------------------------------------------------------*/
 void C_Test_Initialize(void);
+
+
+
+/*-----------------------------------------------------------------------------------------------
+Function Name:
+    C_Test_Configure_Output_Mode
+
+Function Description:
+    Configure the output mode for the test with the given output mode enum.
+
+Inputs:
+    output_mode_enum: enumerated output mode type. One of two values given below:
+
+        C_TEST_OUTPUT_MODE_SHOW_ALL_RESULTS: show all the test results in the output.
+        C_TEST_OUTPUT_MODE_SHOW_ONLY_FAILING_TESTS: show only the failing tests in the output.
+
+Returns:
+    None
+
+Assumptions/Limitations:
+    Defaults to C_TEST_OUTPUT_MODE_SHOW_ALL_RESULTS if an invalid value is passed to the function.
+-------------------------------------------------------------------------------------------------*/
+void C_Test_Configure_Output_Mode(c_test_output_mode_enum_t output_mode_enum);
 
 
 
