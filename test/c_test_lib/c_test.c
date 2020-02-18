@@ -52,6 +52,7 @@ typedef struct c_test_case_type
 --|---------------------------------------------------------|
 */
 
+// array of test cases, each contains an array of test comparisons
 static c_test_case_t test_cases[MAX_NUM_TEST_CASES];
 
 // the current test case number, each test case is made up of a number of test comparisons
@@ -150,7 +151,7 @@ bool C_Test_Assert_Equals_ui32(uint32_t expected, uint32_t actual)
 
 void C_Test_Show_Test_Results_In_Terminal(void)
 {
-    for (int test_case = 1; test_case <= Test_Case_Number; test_case++)
+    for (uint8_t test_case = 1u; test_case <= Test_Case_Number; test_case++)
     {    
         // show all the results if configured to do so or if there is a failing comparison in this test case
         if (output_mode == C_TEST_OUTPUT_MODE_SHOW_ALL_RESULTS || 
@@ -160,7 +161,7 @@ void C_Test_Show_Test_Results_In_Terminal(void)
                 test_case, 
                 test_cases[test_case].description);
 
-            for (int comparison = 1; comparison <= test_cases[test_case].num_comparisons; comparison++)
+            for (uint8_t comparison = 1u; comparison <= test_cases[test_case].num_comparisons; comparison++)
             {
                 printf("#%02d.%02d: %-38s %16s %16s %16s\n", 
                     test_case, 
