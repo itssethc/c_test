@@ -39,21 +39,27 @@ C_TEST_OBJECT_FILES += $(patsubst $(TEST_LIB_DIR)%.c,$(BIN_DIR)%.o,$(wildcard $(
 C_TEST_OBJECT_FILES += $(C_OBJECT_FILES)
 C_TEST_OBJECT_FILES := $(filter-out $(MAIN_C_OBJECT_FILE), $(C_TEST_OBJECT_FILES))
 
+# compile the user provided application source files
 $(BIN_DIR)%.o: $(SRC_DIR)%.c
 	$(C_COMPILER) $(C_FLAGS) -c $< -o $@
 
+# compile the user provided test files
 $(BIN_DIR)%.o: $(TEST_DIR)%.c
 	$(C_COMPILER) $(C_FLAGS) -c $< -o $@
 
+# compile the test library files
 $(BIN_DIR)%.o: $(TEST_LIB_DIR)%.c
 	$(C_COMPILER) $(C_FLAGS) -c $< -o $@
 
-$(TARGET): $(C_OBJECT_FILES)
+# link the main application target
+$(TARGET): $(BIN_DIR) $(C_OBJECT_FILES)
 	$(C_COMPILER) $(C_OBJECT_FILES) -o $(TARGET)
 
+# link the test target
 $(TEST_TARGET): $(BIN_DIR) $(C_TEST_OBJECT_FILES)
 	$(C_COMPILER) $(C_TEST_OBJECT_FILES) -o $(TEST_TARGET)
 
+# if ./bin/ does not exist, create the directory
 $(BIN_DIR):
 	mkdir $@
 
