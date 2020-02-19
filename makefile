@@ -34,7 +34,7 @@ MAIN_C_OBJECT_FILE = $(BIN_DIR)main.o
 
 C_OBJECT_FILES := $(patsubst $(SRC_DIR)%.c,$(BIN_DIR)%.o,$(wildcard $(SRC_DIR)*.c))
 
-# the test files library can test everything except ./src/main.c, this (if present) is filtered out
+# the test library can test everything except ./src/main.c, this (if present) is filtered out
 C_TEST_OBJECT_FILES := $(patsubst $(TEST_DIR)%.c,$(BIN_DIR)%.o,$(wildcard $(TEST_DIR)*.c))
 C_TEST_OBJECT_FILES += $(patsubst $(TEST_LIB_DIR)%.c,$(BIN_DIR)%.o,$(wildcard $(TEST_LIB_DIR)*.c))
 C_TEST_OBJECT_FILES += $(C_OBJECT_FILES)
