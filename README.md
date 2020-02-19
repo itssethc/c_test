@@ -19,7 +19,7 @@
 - clean the ./bin/ directory
 
 ## To run your main application without testing:
-- Put your .c file with a main function in the ./src/ directory.
+- Put your main.c file with a main function in the ./src/ directory.
 - To compile your main application: $ make
 - To run your main application: $ make run 
 - to clean: $ make clean
