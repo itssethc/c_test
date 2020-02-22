@@ -2,8 +2,6 @@
 
 ## This repository contains the c_test_lib library to assist in writing and running unit tests, as well as the structure and support for a c-language project.
 
-## *** This is in its very early stages. For now you can compare unsigned 32 bit integers only ***
-
 ## Project Structure:
 - Your .c source files go in ./src/
 - Your .h header files go in ./include/
