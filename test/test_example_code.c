@@ -26,6 +26,7 @@ void Verify_is_even(void);
 
 void Verify_toggle_case(void);
 
+void Verify_float_math(void);
 
 
 /*
@@ -50,6 +51,7 @@ int main(void)
     Verify_increment_int();
     Verify_is_even();
     Verify_toggle_case();
+    Verify_float_math();
 
     /* Display the results */
     C_Test_Show_Test_Results_In_Terminal();
@@ -104,7 +106,7 @@ void Verify_toggle_case(void)
     // with some creativity you can test strings and many
     // other data types, here is one way to test strings:
 
-    C_Test_Start_Next_Test_Case("Verify toggle_case to upper");
+    C_Test_Start_Next_Test_Case("Verify toggle_case");
 
     // Set up test variables
     char actual_str[]         = "tEsTInG";
@@ -125,4 +127,19 @@ void Verify_toggle_case(void)
         C_Test_Assert_Equals_ui32(expected_str[str_index], actual_str[str_index]);
         str_index++;
     }
+}
+
+
+
+void Verify_float_math(void)
+{
+    const float epsilon = 0.001f;
+
+    C_Test_Start_Next_Test_Case("Verify Floating point asserts");
+
+    C_Test_Add_Description_To_Next_Comparison("one * one is one");
+    C_Test_Assert_Equals_fl32(1.0f, 1.0f * 1.0f, epsilon);
+
+    C_Test_Add_Description_To_Next_Comparison("123.4 / 33.3 = 3.7057");
+    C_Test_Assert_Equals_fl32(3.7057f, 123.4f / 33.3f, epsilon);
 }
