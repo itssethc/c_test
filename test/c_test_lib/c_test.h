@@ -153,6 +153,29 @@ bool C_Test_Assert_Equals_ui32(uint32_t expected, uint32_t actual);
 
 /*-----------------------------------------------------------------------------------------------
 Function Name:
+    C_Test_Assert_Equals_fl32
+
+Function Description:
+    Compare two single precision floating point numbers, record the result in the test log, and
+    return the result.
+
+Inputs:
+    expected: the expected float value.
+    actual:   the actual float value.
+    epsilon:  (abs(expected - actual) < epsilon) must be true in order for the comparison to pass.
+
+Returns:
+    bool: true if the expected and actual values are within epsilon of each other, false otherwise.
+
+Assumptions/Limitations:
+    None.
+-------------------------------------------------------------------------------------------------*/
+bool C_Test_Assert_Equals_fl32(float expected, float actual, float epsilon);
+
+
+
+/*-----------------------------------------------------------------------------------------------
+Function Name:
     C_Test_Show_Test_Results_In_Terminal
 
 Function Description:

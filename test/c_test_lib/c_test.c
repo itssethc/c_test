@@ -75,6 +75,19 @@ static c_test_output_mode_enum_t output_mode;
 /*
 --|--------------------------------------------------------|
 --|
+--| Private C Test Helper Function Declarations
+--|
+--|---------------------------------------------------------|
+*/
+
+// return the absolute value of the given float 
+float abs_fl32(float x);
+
+
+
+/*
+--|--------------------------------------------------------|
+--|
 --| Public Function Definitions
 --|
 --|---------------------------------------------------------|
@@ -149,6 +162,38 @@ bool C_Test_Assert_Equals_ui32(uint32_t expected, uint32_t actual)
 
 
 
+bool C_Test_Assert_Equals_fl32(float expected, float actual, float epsilon)
+{
+    Total_Num_Comparisons++;
+    test_cases[Test_Case_Number].num_comparisons++;
+
+    float diff = expected - actual;
+
+    bool result = abs_fl32(diff) < epsilon;
+
+    if (result)
+    {
+        Total_Num_Passing_Comparisons++;
+    }
+    else
+    {
+        Total_Num_Failing_Comparisons++;
+        test_cases[Test_Case_Number].num_failing_comparisons++;
+    }
+    
+    c_test_comparison_t * p_current_comparison = 
+        &(test_cases[Test_Case_Number].
+        comparisons[test_cases[Test_Case_Number].num_comparisons]);
+
+    snprintf(p_current_comparison->expected, 16, "%ff", expected);
+    snprintf(p_current_comparison->actual,   16, "%ff", actual);
+    p_current_comparison->result = result;
+    
+    return result;
+}
+
+
+
 void C_Test_Show_Test_Results_In_Terminal(void)
 {
     for (uint8_t test_case = 1u; test_case <= Test_Case_Number; test_case++)
@@ -187,4 +232,19 @@ void C_Test_Show_Test_Results_In_Terminal(void)
     printf("---| Passing tests: %u\n", Total_Num_Passing_Comparisons);
     printf("---| Failing tests: %u\n", Total_Num_Failing_Comparisons);
     printf("\n---| Test %s\n\n", Total_Num_Failing_Comparisons == 0u ? "PASSED" : "FAILED");
+}
+
+
+
+/*
+--|--------------------------------------------------------|
+--|
+--| Private C Test Helper Function Definitions
+--|
+--|---------------------------------------------------------|
+*/
+
+float abs_fl32(float x)
+{
+    return x > 0.0f ? x : x * -1.0f;
 }
